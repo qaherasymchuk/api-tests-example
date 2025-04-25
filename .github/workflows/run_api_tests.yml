@@ -1,4 +1,4 @@
-name: UI tests
+name: API tests
 
 on:
   pull_request:
