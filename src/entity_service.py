@@ -9,15 +9,15 @@ class EntityService(BaseRequest):
     def get_all(self):
         return self.send_get(self.resource_url)
 
-    def get_contains(self, filter: str, fields: list[str] = None):
-        url = f"{self.resource_url}/{filter}"
+    def get_contains(self, filter_param: str, fields: list[str] = None):
+        url = f"{self.resource_url}/{filter_param}"
         if fields:
             fields = ",".join(fields)
             url += f"/{fields}"
         return self.send_get(url)
 
-    def get_exact_match(self, filter: str, fields: list[str] = None):
-        url = f"{self.resource_url}/{filter}:abs"
+    def get_exact_match(self, filter_param: str, fields: list[str] = None):
+        url = f"{self.resource_url}/{filter_param}:abs"
         if fields:
             fields = ",".join(fields)
             url += f"/{fields}"

@@ -1,8 +1,6 @@
 import pytest
 
-from src.author_service import AuthorService
 from pytest_schema import exact_schema
-
 from src.title_service import TitleService
 
 
@@ -33,7 +31,7 @@ class TestTitleService:
     @pytest.mark.parametrize("title_param", titles_params_contains())
     def test_get_author_by_name_contains_match(self, title_param: str):
         response = self.api.get_contains(
-            filter=title_param,
+            filter_param=title_param,
             fields=["author", "title"]
         )
         expected_schema = [
@@ -49,7 +47,7 @@ class TestTitleService:
 
     def test_get_author_not_found_contains(self):
         response = self.api.get_contains(
-            filter="NON EXISTING"
+            filter_param="NON EXISTING"
         )
         expected = {
             "status": 404,
@@ -60,7 +58,7 @@ class TestTitleService:
 
     def test_get_author_not_found_exact_match(self):
         response = self.api.get_exact_match(
-            filter="All",
+            filter_param="All",
         )
         expected = {
             "status": 404,
@@ -72,7 +70,7 @@ class TestTitleService:
     def test_get_author_by_name_exact_match(self):
         param = "247. Ode, Sacred to the Memory of Mrs. Oswald of Auchencruive"
         response = self.api.get_exact_match(
-            filter=param,
+            filter_param=param,
             fields=["author", "title", "lines"]
         )
         expected_schema = [

@@ -1,9 +1,11 @@
 import json
 import os
-from loguru import logger
 from collections import namedtuple
+from loguru import logger
 
 from requests import Response, get, post, patch, put, delete
+
+from constants import REQUEST_TIMEOUT
 
 
 class BaseRequest:
@@ -15,7 +17,7 @@ class BaseRequest:
     @staticmethod
     def log_pretty_json(res):
         content_type_rs = res.headers.get('content-type')
-        if len(res.content) > 0 and (content_type_rs in ["application/json", "application/problem+json"]):
+        if len(res.content) > 0 and (content_type_rs in {"application/json", "application/problem+json"}):
             pretty_json = json.dumps(res.json(), sort_keys=True, indent=4)
             logger.info(f"\nResponse:\n{pretty_json}")
 
@@ -27,7 +29,7 @@ class BaseRequest:
         if params is None:
             params = {}
         logger.info(f"Send GET request to: '{self._base_url + endpoint}' with param: '{params}' and headers: {headers}")
-        response = get(self._base_url + endpoint, params=params, headers=headers)
+        response = get(self._base_url + endpoint, params=params, headers=headers, timeout=REQUEST_TIMEOUT)
         self.log_pretty_json(response)
         return response
 
@@ -38,27 +40,41 @@ class BaseRequest:
                         f"data: {data}\n"
                         f"params: {params}\n"
                         f"{self._base_url + endpoint} with payload: \n{json.dumps(payload, sort_keys=True, indent=4)}")
-        response = post(self._base_url + endpoint, json=payload, data=data, headers=headers, params=params, auth=auth)
+        response = post(
+            self._base_url + endpoint,
+            json=payload,
+            data=data,
+            headers=headers,
+            params=params,
+            auth=auth,
+            timeout=REQUEST_TIMEOUT
+        )
         self.log_pretty_json(response)
         return response
 
     def send_patch(self, endpoint, payload=None, headers=None) -> Response:
         if len(payload) > 0:
             logger.info(f"Send PATCH request to : {self._base_url + endpoint} with payload: \n{payload}")
-        response = patch(self._base_url + endpoint, json=payload, headers=headers)
+        response = patch(self._base_url + endpoint, json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
         self.log_pretty_json(response)
         return response
 
     def send_delete(self, endpoint, payload=None, headers=None, params=None) -> Response:
         if len(payload) > 0:
             logger.info(f"Send DELETE request to : {self._base_url + endpoint} with payload: \n{payload}")
-        response = delete(self._base_url + endpoint, json=payload, headers=headers, params=params)
+        response = delete(
+            self._base_url + endpoint,
+            json=payload,
+            headers=headers,
+            params=params,
+            timeout=REQUEST_TIMEOUT
+        )
         self.log_pretty_json(response)
         return response
 
     def send_put(self, endpoint, payload=None, headers=None, params=None) -> Response:
         if len(payload) > 0:
             logger.info(f"Send PUT request to : {self._base_url + endpoint} with payload: \n{payload}")
-        response = put(self._base_url + endpoint, json=payload, headers=headers, params=params)
+        response = put(self._base_url + endpoint, json=payload, headers=headers, params=params, timeout=REQUEST_TIMEOUT)
         self.log_pretty_json(response)
         return response

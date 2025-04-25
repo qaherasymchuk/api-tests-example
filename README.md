@@ -3,7 +3,7 @@
 This project includes automated tests for the Poetry API's **Author** and **Title** services. Tests are written in Python using `pytest` and validate API responses for correctness, structure, and expected behavior.
 
 Pylint check:  
-[![API tests](https://github.com/qaherasymchuk/api-tests-example/run_pylint_check.yml/badge.svg)](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_pylint_check.yml)
+[![PyLint check](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_pylint_check.yml/badge.svg)](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_pylint_check.yml)
 
 Test runs:  
 [![UI tests](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_api_tests.yml/badge.svg)](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_api_tests.yml)

@@ -1,7 +1,7 @@
 import pytest
 
-from src.author_service import AuthorService
 from pytest_schema import exact_schema
+from src.author_service import AuthorService
 
 
 def authors_params_contains() -> str:
@@ -161,7 +161,7 @@ class TestAuthorService:
     @pytest.mark.parametrize("author_param", authors_params_contains())
     def test_get_author_by_name_contains_match(self, author_param: str):
         response = self.api.get_contains(
-            filter=author_param,
+            filter_param=author_param,
             fields=["author", "title"]
         )
         expected_schema = [
@@ -177,7 +177,7 @@ class TestAuthorService:
 
     def test_get_author_not_found_contains(self):
         response = self.api.get_contains(
-            filter="NON EXISTING"
+            filter_param="NON EXISTING"
         )
         expected = {
             "status": 404,
@@ -188,7 +188,7 @@ class TestAuthorService:
 
     def test_get_author_not_found_exact_match(self):
         response = self.api.get_exact_match(
-            filter="Anne B",
+            filter_param="Anne B",
         )
         expected = {
             "status": 404,
@@ -200,7 +200,7 @@ class TestAuthorService:
     def test_get_author_by_name_exact_match(self):
         param = "Anne Bradstreet"
         response = self.api.get_exact_match(
-            filter=param,
+            filter_param=param,
             fields=["author", "title", "lines"]
         )
         expected_schema = [
