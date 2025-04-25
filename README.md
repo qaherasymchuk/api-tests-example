@@ -2,17 +2,24 @@
 
 This project includes automated tests for the Poetry API's **Author** and **Title** services. Tests are written in Python using `pytest` and validate API responses for correctness, structure, and expected behavior.
 
+Pylint check:  
+[![API tests](https://github.com/qaherasymchuk/api-tests-example/run_pylint_check.yml/badge.svg)](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_pylint_check.yml)
+
+Test runs:  
+[![UI tests](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_api_tests.yml/badge.svg)](https://github.com/qaherasymchuk/api-tests-example/actions/workflows/run_api_tests.yml)
+
+
 ## Test Coverage
 
 ### 🧪 `test_author_service.py`
 
-| Test Case Name                          | Description                                                                                   | Validations Used |
-|----------------------------------------|-----------------------------------------------------------------------------------------------|------------------|
-| test_get_all_authors                   | Verifies full list of authors is returned with correct schema and order                       | ✅ Status code = 200<br>✅ JSON schema<br>✅ Full expected author list match |
-| test_get_author_by_name_contains_match | Checks partial matches return correct results with expected fields                            | ✅ Status code = 200<br>✅ JSON schema<br>✅ Each result contains query string |
-| test_get_author_not_found_contains     | Ensures searching a non-existent author returns 404 and correct error body                    | ✅ Status code = 404<br>✅ Exact JSON body |
-| test_get_author_not_found_exact_match  | Ensures exact match with non-existent name returns 404                                        | ✅ Status code = 404<br>✅ Exact JSON body |
-| test_get_author_by_name_exact_match    | Checks exact match returns full author data with lines, titles, and names                     | ✅ Status code = 200<br>✅ JSON schema<br>✅ Author name matches exactly |
+| Test Case Name                          | Description                                                                                   | Validations Used                                                               |
+|----------------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| test_get_all_authors                   | Verifies full list of authors is returned with correct schema and order                       | ✅ Status code = 200<br>✅ JSON schema<br>✅ Full expected author list match      |
+| test_get_author_by_name_contains_match | Checks partial matches return correct results with expected fields                            | ✅ Status code = 200<br>✅ JSON schema<br>✅ Each result contains query string    |
+| test_get_author_not_found_contains     | Ensures searching a non-existent author returns 404 and correct error body                    | ✅ Status code = 404<br>✅ Exact JSON body                                       |
+| test_get_author_not_found_exact_match  | Ensures exact match with non-existent name returns 404                                        | ✅ Status code = 404<br>✅ Exact JSON body                                       |
+| test_get_author_by_name_exact_match    | Checks exact match returns full author data with lines, titles, and names                     | ✅ Status code = 200<br>✅ JSON schema<br>✅ Author name matches exactly          |
 
 ---
 
